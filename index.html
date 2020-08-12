@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Monster Slayer</title>
+    <script src="https://npmcdn.com/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="css/foundation.min.css">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+
+<body>
+    <div id="app">
+        <section class="row">
+            <div class="small-6 columns">
+                <h1 class="text-center">YOU</h1>
+                <div class="healthbar">
+                    <div class="healthbar text-center" style="margin: 0; color: white;"
+                        :style="{backgroundColor: barColorPlayer, width: playerHealth + '%'}">
+                        {{playerHealth}}
+                    </div>
+                </div>
+            </div>
+            <div class="small-6 columns">
+                <h1 class="text-center">MONSTER</h1>
+                <div class="healthbar">
+                    <div class="healthbar text-center" style="margin: 0; color: white;"
+                        :style="{backgroundColor: barColorMonster, width: monsterHealth + '%'}">
+                        {{monsterHealth}}
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class=" row controls">
+            <div class="small-12 columns">
+                <!-- As soon as the game starts, this button will remail disabled -->
+                <button id="start-game" @click="startGame" :disabled="gameIsRunning">{{gameButton}}</button>
+            </div>
+        </section>
+        <section class="row controls">
+            <div class="small-12 columns">
+                <!-- All interactive buttons will remain disabled until the game starts -->
+                <button id="attack" @click="attack" :disabled="!gameIsRunning">ATTACK</button>
+                <button id="special-attack" @click="specialAttack" :disabled="!gameIsRunning">SPECIAL ATTACK
+                    ({{playerSpecialAttacks}})</button>
+                <button id="heal" @click="heal" :disabled="!gameIsRunning">HEAL ({{playerHeal}})</button>
+                <button id="give-up" @click="giveUp" :disabled="!gameIsRunning">GIVE UP</button>
+            </div>
+        </section>
+        <section class="row log">
+            <div class="small-12 columns">
+                <!-- The script of each battle will be displayed here -->
+                <ul>
+                    <li v-for="(action, i) in script" :key="action + i">
+                        {{action}}
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <script src="./app.js"></script>
+</body>
+
+</html>
